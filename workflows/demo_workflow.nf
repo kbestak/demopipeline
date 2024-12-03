@@ -3,6 +3,8 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+include { MOLKARTGARAGE_CLAHE } from '../modules/nf-core/molkartgarage/clahe/main'
+
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_demo_workflow_pipeline'
@@ -21,6 +23,8 @@ workflow DEMO_WORKFLOW {
 
     ch_versions = Channel.empty()
 
+    MOLKARTGARAGE_CLAHE(ch_samplesheet)
+    MOLKARTGARAGE_CLAHE.out.img_clahe.view()
     //
     // Collate and save software versions
     //

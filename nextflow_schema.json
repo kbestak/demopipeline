@@ -5,6 +5,27 @@
     "description": "Demo workflow in Nextflow using nf-core modules",
     "type": "object",
     "$defs": {
+        "clahe_options": {
+            "title": "Clahe options",
+            "type": "object",
+            "description": "Options for CLAHE",
+            "default": "",
+            "properties": {
+                "pixel_size": {
+                    "type": "number",
+                    "default": 0.138,
+                    "fa_icon": "fas fa-square-full",
+                    "description": "Pixel size in microns per pixel",
+                    "minimum": 0
+                },
+                "clahe_cliplimit": {
+                    "type": "number",
+                    "default": 0.01,
+                    "fa_icon": "fas fa-grip-lines",
+                    "description": "CLAHE clip limit"
+                }
+            }
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -84,10 +105,11 @@
     },
     "allOf": [
         {
+            "$ref": "#/$defs/clahe_options"
+        },
+        {
             "$ref": "#/$defs/input_output_options"
         },
-        
-        
         {
             "$ref": "#/$defs/generic_options"
         }
